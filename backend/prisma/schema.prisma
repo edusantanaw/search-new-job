@@ -1,0 +1,57 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String     @id @default(uuid())
+  email       String     @unique
+  password    String
+  firstName   String
+  lastName    String
+  city        String?
+  phoneNumber String?
+  perfilPhoto String?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  ApplyJob    ApplyJob[]
+  Company     Company[]
+}
+
+model Company {
+  id          String   @id @default(uuid())
+  name        String
+  description String   @db.VarChar(500)
+  perfilLogo  String?
+  email       String   @unique
+  phone       Int
+  owner       User     @relation(fields: [ownerId], references: [id])
+  ownerId     String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  Job         Job[]
+}
+
+model Job {
+  id          String     @id @default(uuid())
+  vacancyFor  String
+  CompanyName Company    @relation(fields: [CompanyId], references: [id])
+  CompanyId   String
+  openStatus  Boolean    @default(true)
+  ApplyJob    ApplyJob[]
+}
+
+model ApplyJob {
+  id          String @id @default(uuid())
+  job         Job    @relation(fields: [jobId], references: [id])
+  jobId       String
+  candidate   User   @relation(fields: [candidateId], references: [id])
+  candidateId String
+}
