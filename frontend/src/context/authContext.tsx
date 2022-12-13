@@ -19,6 +19,8 @@ export const AuthProvider = ({ children }: providerProp) => {
         if (userStorage && tokenStorage) {
             setUserAuth(JSON.parse(userStorage))
             setToken(tokenStorage)
+            console.log(isLogged)
+            setIsLogged(true)
         }
     }, [isLogged])
 
@@ -31,11 +33,16 @@ export const AuthProvider = ({ children }: providerProp) => {
     async function signin(email: string, password: string) {
 
         const response = await signinService(email, password)
-        if (typeof response == 'string') {
-
+        console.log(typeof response)
+        if (typeof response !== 'string') {
+            const { accessToken, user } = response
+            setUserAuth(user)
+            setToken(accessToken)
+            setIsLogged(true)
+            return true
         }
-        const { token, user } = response
-        setUserAuth(user)
+        setIsLogged(false)
+        return response
     }
 
     function signout() {
@@ -44,13 +51,21 @@ export const AuthProvider = ({ children }: providerProp) => {
         resetStates()
     }
 
-    async function signup(user: userSignup) {
-
+    async function signup(data: userSignup) {
+        const response = await signupService(data)
+        if (typeof response !== 'string') {
+            const { accessToken, user } = response
+            setUserAuth(user)
+            setToken(accessToken)
+            setIsLogged(true)
+            return true
+        }
+        return response
     }
 
 
     return (
-        <AuthContext.Provider value={{ signin, tokenAuth, signout, signup, userAuth }}>
+        <AuthContext.Provider value={{ signin, tokenAuth, isLogged, signout, signup, userAuth }}>
             {children}
         </AuthContext.Provider>)
 }

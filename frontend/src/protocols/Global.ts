@@ -16,7 +16,8 @@ export interface AuthContextData {
     signin: (email: string, password: string) => Promise<string | true>;
     signup: (user: userSignup) => Promise<string | true>
     signout: () => void;
-    tokenAuth: string | null
+    tokenAuth: string | null;
+    isLogged: boolean;
 }
 
 export interface providerProp {

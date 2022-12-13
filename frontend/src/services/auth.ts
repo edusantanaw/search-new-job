@@ -1,5 +1,4 @@
 import { Api } from "../utils/api";
-import { AxiosResponse } from 'axios'
 
 export type userSignup = {
     firstName: string;
@@ -27,23 +26,25 @@ export async function signinService(email: string, password: string): Promise<st
             makeStorage(user, accessToken)
             return { user, accessToken }
         })
-        .catch((error: { response: { data: string } }) => {
-            return error.response.data
+        .catch((error: { response: { data: { error: string } } }) => {
+            return error.response.data.error
         })
+    console.log(response)
     return response
 
 }
 
 
 export async function signupService(data: userSignup): Promise<string | response> {
-    const response = await Api.post("/signin", data)
+    const response = await Api.post("/signup", data)
         .then((response: { data: response }) => {
             const { user, accessToken } = response.data
             makeStorage(user, accessToken)
             return { user, accessToken }
         })
-        .catch((error: { response: { data: string } }) => {
-            return error.response.data
+        .catch((error: { response: { data: { error: string } } }) => {
+            return error.response.data.error
         })
+    console.log(response)
     return response
 }
