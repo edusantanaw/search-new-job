@@ -3,7 +3,7 @@ import { NotFoundError } from "../../utils/errors/not-found";
 import { loadJobUseCase } from "./protocols/ijob-useCase";
 
 export class LoadJobUseCase implements loadJobUseCase {
-  constructor(private jobRepository: jobRepository) {}
+  constructor(private jobRepository: jobRepository) { }
 
   async loadAll() {
     const vacancy = await this.jobRepository.getAll();
@@ -17,8 +17,8 @@ export class LoadJobUseCase implements loadJobUseCase {
     throw new NotFoundError("vacancys");
   }
 
-  async loadByName(name: string) {
-    const jobs = await this.jobRepository.getJobsByName(name);
+  async loadByName(name: string, city?: string) {
+    const jobs = await this.jobRepository.loadJobsByName(name);
     if (!jobs) throw "Jobs not found!";
     return jobs;
   }

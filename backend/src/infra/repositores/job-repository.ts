@@ -20,15 +20,27 @@ export class JobRepository implements jobRepository {
     return vancacy[0];
   }
 
-  async getJobsByName(name: string) {
-    const vancacys: Job[] = await client.$queryRaw`
+  async loadJobsByName(name: string, city?: string) {
+    if (city) {
+      const vancacys: Job[] = await client.$queryRaw`
+      select * from job
+      inner join company on company.id = job."CompanyId"
+      where vacancyFor like ${`%${name}%`} and "openStatus" = true and city = ${city}; 
+  `;
+
+      if (vancacys.length === 0) return null;
+      return vancacys;
+
+    } else {
+      const vancacys: Job[] = await client.$queryRaw`
         select * from job
         inner join company on company.id = job."CompanyId"
-        where vacancyFor like ${`%${name}%`}; 
+        where vacancyFor like ${`%${name}%`} and "openStatus" = true;  
     `;
 
-    if (vancacys.length === 0) return null;
-    return vancacys;
+      if (vancacys.length === 0) return null;
+      return vancacys;
+    }
   }
 
   async update(status: boolean, id: string) {

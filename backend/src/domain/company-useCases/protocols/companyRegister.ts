@@ -7,6 +7,7 @@ export interface companyRegister {
   email: string;
   phone: number;
   ownerId: string;
+  city: string
 }
 
 export interface companyRepository {

@@ -6,7 +6,7 @@ export class JobUseCase {
   constructor(
     private jobRepository: jobRepository,
     private companyRepository: companyRepository
-  ) {}
+  ) { }
 
   async create(data: { vacancyFor: string; CompanyId: string }) {
     const { CompanyId } = data;
@@ -14,8 +14,9 @@ export class JobUseCase {
       CompanyId
     );
     if (!verifyCompanyExists) throw new NotFoundError("company");
+
     const vancacy = await this.jobRepository.create({
-      ...data,
+      ...data, city: verifyCompanyExists.city,
       openStatus: true,
     });
     return vancacy;

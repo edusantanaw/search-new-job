@@ -3,13 +3,14 @@ import { HttpResponse, InvalidParamError } from "../../../utils/errors";
 import { Controller } from "../../../utils/protocols/controller";
 
 export class LoadJobsByNameRouter implements Controller {
-  constructor(private loadJobCase: loadJobUseCase) {}
+  constructor(private loadJobCase: loadJobUseCase) { }
 
-  async handle({ name }: { name: string }) {
+  // can pass the city and name by query, params or body
+  async handle({ name, city }: { name: string, city?: string }) {
     try {
       if (!name) return HttpResponse.badRequest(new InvalidParamError("name"));
 
-      const jobs = await this.loadJobCase.loadByName(name);
+      const jobs = await this.loadJobCase.loadByName(name, city);
 
       return HttpResponse.ok({ jobs });
     } catch (error) {
