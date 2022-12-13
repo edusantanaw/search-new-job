@@ -9,28 +9,41 @@ export type userSignup = {
     confirmPassword: string
 }
 
+interface response {
+    user: userSignup
+    accessToken: string
+}
+
 const makeStorage = (user: any, token: string) => {
     localStorage.setItem("@App:user", JSON.stringify(user))
     localStorage.setItem("@App:token", token)
 }
 
-export async function signin(email: string, password: string): Promise<userSignup | AxiosResponse> {
+export async function signinService(email: string, password: string): Promise<string | response> {
+
     const response = await Api.post("/signin", { email, password })
-    if (response.status === 200) {
-        const { user, accessToken } = response.data
-        makeStorage(user, accessToken)
-        return response.data
-    }
+        .then((response: { data: response }) => {
+            const { user, accessToken } = response.data
+            makeStorage(user, accessToken)
+            return { user, accessToken }
+        })
+        .catch((error: { response: { data: string } }) => {
+            return error.response.data
+        })
     return response
+
 }
 
 
-export async function signup(data: userSignup): Promise<userSignup | AxiosResponse> {
-    const response = await Api.post("signup", data)
-    if (response.status === 200) {
-        const { user, accessToken } = response.data
-        makeStorage(user, accessToken)
-        return response.data
-    }
+export async function signupService(data: userSignup): Promise<string | response> {
+    const response = await Api.post("/signin", data)
+        .then((response: { data: response }) => {
+            const { user, accessToken } = response.data
+            makeStorage(user, accessToken)
+            return { user, accessToken }
+        })
+        .catch((error: { response: { data: string } }) => {
+            return error.response.data
+        })
     return response
 }

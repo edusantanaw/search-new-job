@@ -7,7 +7,7 @@ export default class SigninRouter implements Controller {
   constructor(
     private emailValidator: emailValidator,
     private signinUseCase: signinUseCase
-  ) {}
+  ) { }
 
   async handle(data: { email: string; password: string }) {
     try {
@@ -27,6 +27,7 @@ export default class SigninRouter implements Controller {
 
       return HttpResponse.ok({ accessToken });
     } catch (error) {
+      console.log(error)
       return HttpResponse.catchError(error);
     }
   }

@@ -3,7 +3,7 @@ const app = express();
 import router from "./config/routes";
 import cors from "cors";
 
-app.use(cors({ credentials: true, origin: "" }));
+app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));

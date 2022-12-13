@@ -1,5 +1,5 @@
 import nodemailer from "nodemailer";
-import config from "../../../config/nodemailer";
+import config from "../../config/nodemailer";
 
 export class SenderEmail {
   async sender(email: string) {
