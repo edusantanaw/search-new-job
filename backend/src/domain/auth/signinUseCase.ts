@@ -1,9 +1,9 @@
 import { encrypter } from "../../utils/protocols/encrypter";
 import { generateToken } from "../../utils/protocols/generateToken";
-import { userRepository } from "../../infra/repositores/protocols/UserRepository";
+import { user, userRepository } from "../../infra/repositores/protocols/UserRepository";
 
 export interface signinUseCase {
-  auth: (email: string, password: string) => Promise<string>;
+  auth: (email: string, password: string) => Promise<{ accessToken: string, user: user }>;
 }
 
 export class SigninUseCase implements signinUseCase {
@@ -27,6 +27,6 @@ export class SigninUseCase implements signinUseCase {
     if (!isValid) throw "Email/password is invalid!";
     const accessToken = this.generateToken.generate(user.id ? user.id : "");
 
-    return accessToken;
+    return { accessToken, user };
   }
 }

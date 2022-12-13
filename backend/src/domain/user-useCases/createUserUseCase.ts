@@ -20,7 +20,7 @@ type props = {
 };
 
 export class CreateUseCase {
-  constructor(public props: props) {}
+  constructor(public props: props) { }
 
   async create(data: IUser) {
     const verify = await this.props.verifyEmailAlreadyBeenUsed.verify(
@@ -35,9 +35,9 @@ export class CreateUseCase {
 
     if (user.id) {
       const accessToken = this.props.generateToken.generate(user.id);
-      await this.props.senderEmail.sender(user.email);
+      // await this.props.senderEmail.sender(user.email);
       return { user, accessToken };
     }
-    throw "error" 
+    throw "error"
   }
 }

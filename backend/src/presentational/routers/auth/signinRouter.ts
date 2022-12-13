@@ -21,11 +21,11 @@ export default class SigninRouter implements Controller {
       if (!this.emailValidator.isValid(email))
         return HttpResponse.badRequest(new InvalidParamError("email"));
 
-      const accessToken = await this.signinUseCase.auth(email, password);
+      const { accessToken, user } = await this.signinUseCase.auth(email, password);
 
       if (!accessToken) return HttpResponse.badRequest({ message: "Invalid" });
 
-      return HttpResponse.ok({ accessToken });
+      return HttpResponse.ok({ accessToken, user });
     } catch (error) {
       console.log(error)
       return HttpResponse.catchError(error);
