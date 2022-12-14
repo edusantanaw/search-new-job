@@ -6,8 +6,10 @@ export class LoadJobsByNameRouter implements Controller {
   constructor(private loadJobCase: loadJobUseCase) { }
 
   // can pass the city and name by query, params or body
-  async handle({ name, city }: { name: string, city?: string }) {
+  async handle(req: { name: string, city?: string }) {
     try {
+      const { name, city } = req
+      console.log(req)
       if (!name) return HttpResponse.badRequest(new InvalidParamError("name"));
 
       const jobs = await this.loadJobCase.loadByName(name, city);

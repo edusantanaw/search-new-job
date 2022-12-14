@@ -19,7 +19,7 @@ export default (router: Router): void => {
     adapt(LoadAllJobsComposer.compose())
   );
   router.get(
-    "/jobs/search",
+    "/jobs/search/:name",
     verifyTokenMiddleware,
     adapt(LoadJobsByNameComposer.compose())
   );

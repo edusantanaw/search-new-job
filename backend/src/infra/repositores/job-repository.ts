@@ -21,13 +21,13 @@ export class JobRepository implements jobRepository {
   }
 
   async loadJobsByName(name: string, city?: string) {
+    console.log(name, city)
     if (city) {
       const vancacys: Job[] = await client.$queryRaw`
       select * from job
       inner join company on company.id = job."CompanyId"
-      where vacancyFor like ${`%${name}%`} and "openStatus" = true and city = ${city}; 
   `;
-
+      console.log(vancacys)
       if (vancacys.length === 0) return null;
       return vancacys;
 
@@ -35,9 +35,9 @@ export class JobRepository implements jobRepository {
       const vancacys: Job[] = await client.$queryRaw`
         select * from job
         inner join company on company.id = job."CompanyId"
-        where vacancyFor like ${`%${name}%`} and "openStatus" = true;  
+        where "vacancyFor" like ${`%${name}%`} and "openStatus" = true;  
     `;
-
+      console.log(vancacys)
       if (vancacys.length === 0) return null;
       return vancacys;
     }

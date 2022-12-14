@@ -18,7 +18,7 @@ export class LoadJobUseCase implements loadJobUseCase {
   }
 
   async loadByName(name: string, city?: string) {
-    const jobs = await this.jobRepository.loadJobsByName(name);
+    const jobs = await this.jobRepository.loadJobsByName(name, city);
     if (!jobs) throw "Jobs not found!";
     return jobs;
   }

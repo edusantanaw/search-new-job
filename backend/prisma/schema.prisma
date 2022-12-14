@@ -25,6 +25,7 @@ model User {
   Company     Company[]
 
   @@index([email])
+  @@map("user")
 }
 
 model Company {
@@ -42,6 +43,7 @@ model Company {
   Job         Job[]
 
   @@index([email])
+  @@map("company")
 }
 
 model Job {
@@ -54,6 +56,7 @@ model Job {
   ApplyJob    ApplyJob[]
 
   @@index([city])
+  @@map("job")
 }
 
 model ApplyJob {
@@ -64,4 +67,5 @@ model ApplyJob {
   candidateId String
 
   @@index([candidateId])
+  @@map("apply")
 }
