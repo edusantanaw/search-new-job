@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { userSignup } from "../services/auth";
+import { userSignup } from "../services/auth.services";
 
 
 export type userAuth = {

@@ -18,6 +18,8 @@ const SearchBar = () => {
         }
     }
 
+
+
     return (
         <div className='search'>
             <Input
@@ -32,7 +34,7 @@ const SearchBar = () => {
                 ref={cityRef}
                 id="search"
             />
-            <Button onClick={handleSearch}><BiSearchAlt2 /></Button>
+            <Button onClick={handleSearch}><span>Achar vagas</span><BiSearchAlt2 /></Button>
         </div>
     )
 }

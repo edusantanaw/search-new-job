@@ -57,7 +57,7 @@ export class JobRepository implements jobRepository {
   async loadRecents(skip: number, take: number) {
     const vancacys = await job.findMany({
       orderBy: {
-        createdAt: 'desc'
+        createdAt: 'asc'
       },
       skip: skip,
       take: take

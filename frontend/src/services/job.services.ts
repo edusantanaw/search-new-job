@@ -9,17 +9,40 @@ export type jobs = {
     vacancyFor: string;
     id: string;
     companyName: string;
+    city: string;
+    salary: number;
 }
 
-export async function search(url: string, data: string) {
+export async function search(data: string[]) {
     const token = makeToken()
-    const response = await Api.get(url, {
-        params: { city: data },
+    updateRecentsSearchs(data[0])
+    const response = await Api.get(`/jobs/search/${data[0]}`, {
+        params: { city: data[1] },
         headers: {
             Authorization: `Bearer ${token}`,
 
         }
     })
-    console.log(response)
     return response.data
+}
+
+function updateRecentsSearchs(search: string) {
+    const recents = JSON.parse(localStorage.getItem("@App:recents") || "[]")
+    const verifyAlreadyExists: string[] = recents.filter((recent: string) => recent === search)
+    if (verifyAlreadyExists.length > 0) return
+    const updatedRecents: string[] = [search, ...recents]
+    localStorage.setItem('@App:recents', JSON.stringify(updatedRecents))
+}
+
+
+export async function loadRecentJobs() {
+    const token = makeToken()
+    const response: { data: { vancacy: jobs[] } } = await Api.get("jobs", {
+        headers: {
+            Authorization: `Bearer ${token}`,
+
+        }
+    })
+    console.log(response.data.vancacy)
+    return response.data.vancacy
 }

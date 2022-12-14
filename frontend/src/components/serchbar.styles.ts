@@ -15,9 +15,12 @@ export const Input = styled.input<inputprops>`
 
 export const Button = styled.button`
     font-size: 1.1em;
+    padding:  1.2em;
+    display: flex;
+    align-items: center;
+    gap: 0.3em;
     height: 2.1em;
     color: #fff;
-    width: 2.3em;
     font-weight: bold;
     display: flex;
     align-items: center;

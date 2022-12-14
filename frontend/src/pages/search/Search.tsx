@@ -11,6 +11,7 @@ const Search = () => {
         if (params) {
             const query = params.split('+')
             setQuery(query)
+
         }
     }, [params])
 
@@ -18,7 +19,7 @@ const Search = () => {
         (async () => {
             if (apiQuery) {
                 const response =
-                    await search(`/jobs/search/${apiQuery[0]}`, apiQuery[1])
+                    await search(apiQuery)
                 setData(response)
             }
         }

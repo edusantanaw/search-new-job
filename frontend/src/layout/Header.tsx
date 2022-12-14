@@ -10,7 +10,6 @@ const Header = () => {
     return (
         <Container>
             <Logo>This is my logo</Logo>
-
             <ul>
                 <li>Anunciar vaga</li>
                 <li>Empresas</li>
