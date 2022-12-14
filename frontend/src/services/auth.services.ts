@@ -26,8 +26,9 @@ export async function signinService(email: string, password: string): Promise<st
             makeStorage(user, accessToken)
             return { user, accessToken }
         })
-        .catch((error: { response: { data: { error: string } } }) => {
-            return error.response.data.error
+        .catch((error: { response: { data: string } }) => {
+            console.log(error)
+            return error.response.data
         })
     console.log(response)
     return response
@@ -42,8 +43,8 @@ export async function signupService(data: userSignup): Promise<string | response
             makeStorage(user, accessToken)
             return { user, accessToken }
         })
-        .catch((error: { response: { data: { error: string } } }) => {
-            return error.response.data.error
+        .catch((error: { response: { data: string } }) => {
+            return error.response.data
         })
     console.log(response)
     return response

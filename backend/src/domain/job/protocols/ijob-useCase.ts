@@ -1,12 +1,12 @@
 import { Job } from "@prisma/client";
 
 export interface createJobUseCase {
-  create: (data: { vacancyFor: string; CompanyId: string }) => Promise<Job>;
+  create: (data: { vacancyFor: string; CompanyId: string, salary: number }) => Promise<Job>;
 }
 
 export interface loadJobUseCase {
   loadById: (id: string) => Promise<Job | null>;
-  loadAll: () => Promise<Job[]>;
+  loadRecentVacancys: (skip: number, take: number) => Promise<Job[]>;
   loadByName: (name: string, city?: string) => Promise<Job[]>;
 }
 

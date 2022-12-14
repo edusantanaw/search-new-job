@@ -1,11 +1,8 @@
+import { companyRepository } from "../../infra/repositores/protocols/companyRegister";
 import { emailAlreadyUsed } from "../../utils/errors";
-import {
-  companyRegister,
-  companyRepository,
-} from "./protocols/companyRegister";
 
 export class CompanyUseCase {
-  constructor(private companyRepository: companyRepository) {}
+  constructor(private companyRepository: companyRepository) { }
 
   async create(data: any) {
     const verifyIfEmail = await this.companyRepository.loadByEmail(data.email);

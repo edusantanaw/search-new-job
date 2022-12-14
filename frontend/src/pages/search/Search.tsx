@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { useAuth } from '../../context/authContext'
-import { Api } from '../../utils/api'
+import { jobs, search } from '../../services/job.services'
 
 const Search = () => {
     const params = useParams().params
     const [apiQuery, setQuery] = useState<string[] | null>(null)
-    const { tokenAuth } = useAuth()
+    const [data, setData] = useState<jobs[] | null>(null)
 
     useEffect(() => {
         if (params) {
@@ -18,15 +17,13 @@ const Search = () => {
     useEffect(() => {
         (async () => {
             if (apiQuery) {
-                const response = await Api.get(`/jobs/search/${apiQuery[0]}${apiQuery[1] ? `?city=${apiQuery[1]}` : ''}`, {
-                    headers: {
-                        Authorization: `Bearer ${tokenAuth}`
-                    }
-                })
-
-                console.log(response)
+                const response =
+                    await search(`/jobs/search/${apiQuery[0]}`, apiQuery[1])
+                setData(response)
             }
-        })()
+        }
+
+        )()
     }, [apiQuery])
 
     return (

@@ -1,12 +1,12 @@
 import { LoadJobUseCase } from "../../../domain/job/loadJobUseCase";
 import { JobRepository } from "../../../infra/repositores/job-repository";
-import { LoadAllJobRouter } from "../../../presentational/routers/job/loadAllJobs";
+import { LoadRecentJobRouter } from "../../../presentational/routers/job/loadRecentsJobs";
 
-export default class LoadAllJobsComposer {
+export class LoadRecentsJobsComposer {
   static compose() {
     const loadJobRepository = new JobRepository();
     const loadJobUseCase = new LoadJobUseCase(loadJobRepository);
 
-    return new LoadAllJobRouter(loadJobUseCase);
+    return new LoadRecentJobRouter(loadJobUseCase);
   }
 }

@@ -2,12 +2,12 @@ import { loadJobUseCase } from "../../../domain/job/protocols/ijob-useCase";
 import { HttpResponse } from "../../../utils/errors";
 import { Controller } from "../../../utils/protocols/controller";
 
-export class LoadAllJobRouter implements Controller {
-  constructor(private loadUserUseCase: loadJobUseCase) {}
+export class LoadRecentJobRouter implements Controller {
+  constructor(private loadUserUseCase: loadJobUseCase) { }
 
-  async handle() {
+  async handle({ skip, take }: { skip: number, take: number }) {
     try {
-      const vancacy = await this.loadUserUseCase.loadAll();
+      const vancacy = await this.loadUserUseCase.loadRecentVacancys(skip, take);
       return HttpResponse.ok({ vancacy });
     } catch (error) {
       return HttpResponse.catchError(error);

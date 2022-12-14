@@ -1,7 +1,7 @@
 import { Router } from "express";
 import adapt from "../adapters/express-router-adapter";
 import { CreateJobComposer } from "../composers/job/create-job-composer";
-import LoadAllJobsComposer from "../composers/job/loadAllCompanyComposer";
+import { LoadRecentsJobsComposer } from "../composers/job/loadRecentsCompanyComposer";
 import { LoadJobByIdComposer } from "../composers/job/loadById-composer";
 import { LoadJobsByNameComposer } from "../composers/job/loadByNameComposer";
 import { UpdateJobComposer } from "../composers/job/updatedStatus-composer";
@@ -16,7 +16,7 @@ export default (router: Router): void => {
   router.get(
     "/jobs",
     verifyTokenMiddleware,
-    adapt(LoadAllJobsComposer.compose())
+    adapt(LoadRecentsJobsComposer.compose())
   );
   router.get(
     "/jobs/search/:name",

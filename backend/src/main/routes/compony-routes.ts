@@ -4,6 +4,8 @@ import CompanyRegisterCompose from "../composers/company/company-register-compos
 
 import { verifyTokenMiddleware } from "../middlewares/verifyToken";
 import { multerMiddleware } from "../middlewares/multer";
+import { LoadAllCompanyComposer } from "../composers/company/loadAllCompanyComposer";
+import { LoadCompanyByIdComposer } from "../composers/company/loadCompanyByIdComposer";
 
 export default (router: Router): void => {
   router.post(
@@ -12,4 +14,14 @@ export default (router: Router): void => {
     multerMiddleware,
     adapt(CompanyRegisterCompose.compose())
   );
+  router.get(
+    '/company',
+    verifyTokenMiddleware,
+    adapt(LoadAllCompanyComposer.compose())
+  );
+  router.get(
+    '/company/:id',
+    verifyTokenMiddleware,
+    adapt(LoadCompanyByIdComposer.compose())
+  )
 };

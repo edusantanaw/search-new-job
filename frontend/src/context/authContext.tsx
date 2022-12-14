@@ -1,7 +1,6 @@
 import { createContext, useState, useContext, useEffect } from 'react'
 import { AuthContextData, providerProp, userAuth } from '../protocols/Global';
-import { userSignup } from '../services/auth';
-import { signinService, signupService } from '../services/auth'
+import { signinService, signupService, userSignup } from '../services/auth.services'
 
 
 export const AuthContext = createContext({} as AuthContextData)
@@ -19,7 +18,6 @@ export const AuthProvider = ({ children }: providerProp) => {
         if (userStorage && tokenStorage) {
             setUserAuth(JSON.parse(userStorage))
             setToken(tokenStorage)
-            console.log(isLogged)
             setIsLogged(true)
         }
     }, [isLogged])
@@ -33,7 +31,6 @@ export const AuthProvider = ({ children }: providerProp) => {
     async function signin(email: string, password: string) {
 
         const response = await signinService(email, password)
-        console.log(typeof response)
         if (typeof response !== 'string') {
             const { accessToken, user } = response
             setUserAuth(user)

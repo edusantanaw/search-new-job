@@ -1,8 +1,10 @@
+import { companyRepository } from "../../infra/repositores/protocols/companyRegister";
 import { NotFoundError } from "../../utils/errors/not-found";
-import { companyRepository } from "./protocols/companyRegister";
+import { loadCompanyUseCase } from "./protocols/loadCompanyUseCase";
 
-export class LoadCompanyUseCase {
-  constructor(private companyRepository: companyRepository) {}
+
+export class LoadCompanyUseCase implements loadCompanyUseCase {
+  constructor(private companyRepository: companyRepository) { }
 
   async loadById(id: string) {
     const company = await this.companyRepository.loadById(id);

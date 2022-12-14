@@ -8,7 +8,7 @@ export class JobUseCase {
     private companyRepository: companyRepository
   ) { }
 
-  async create(data: { vacancyFor: string; CompanyId: string }) {
+  async create(data: { vacancyFor: string; CompanyId: string, salary: number }) {
     const { CompanyId } = data;
     const verifyCompanyExists = await this.companyRepository.loadById(
       CompanyId

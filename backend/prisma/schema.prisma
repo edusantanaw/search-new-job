@@ -2,7 +2,8 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider       = "prisma-client-js"
+  reviewFeatures = ["orderByRelation"]
 }
 
 datasource db {
@@ -51,20 +52,23 @@ model Job {
   vacancyFor  String
   CompanyName Company    @relation(fields: [CompanyId], references: [id])
   CompanyId   String
+  salary      Float      @default(0)
   city        String
   openStatus  Boolean    @default(true)
   ApplyJob    ApplyJob[]
+  createdAt   DateTime   @default(now())
 
   @@index([city])
   @@map("job")
 }
 
 model ApplyJob {
-  id          String @id @default(uuid())
-  job         Job    @relation(fields: [jobId], references: [id])
+  id          String   @id @default(uuid())
+  job         Job      @relation(fields: [jobId], references: [id])
   jobId       String
-  candidate   User   @relation(fields: [candidateId], references: [id])
+  candidate   User     @relation(fields: [candidateId], references: [id])
   candidateId String
+  createdAt   DateTime @default(now())
 
   @@index([candidateId])
   @@map("apply")

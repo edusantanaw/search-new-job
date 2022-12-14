@@ -1,42 +1,28 @@
-import React, { useRef } from 'react'
-import { Container, Logo, Input, Button } from './header.styles'
-import { BiSearchAlt2 } from 'react-icons/bi'
-import { useNavigate } from 'react-router-dom'
+import React from 'react'
+import { Container, Logo } from './header.styles'
+import { useAuth } from '../context/authContext'
+import defaultImg from '../assets/perfilDefult.jpeg'
 
 const Header = () => {
 
-    const searchRef = useRef<HTMLInputElement | null>(null)
-    const cityRef = useRef<HTMLInputElement | null>(null)
-    const navigate = useNavigate()
-
-    function handleSearch() {
-        if (searchRef.current) {
-            const search = searchRef.current.value
-            const city = cityRef.current ? cityRef.current.value : null
-            navigate(`/search/${search}+${city}`);
-
-        }
-    }
-
+    const { userAuth } = useAuth()
 
     return (
         <Container>
             <Logo>This is my logo</Logo>
-            <div className='search'>
-                <Input
-                    w="12em"
-                    placeholder='procurar vagas...'
-                    ref={searchRef}
-                    id="search"
-                />
-                <Input
-                    w="6em"
-                    placeholder='filtrar por cidade'
-                    ref={cityRef}
-                    id="search"
-                />
-                <Button onClick={handleSearch}><BiSearchAlt2 /></Button>
-            </div>
+
+            <ul>
+                <li>Anunciar vaga</li>
+                <li>Empresas</li>
+                <li>Achar vagas</li>
+                <li>
+                    <img
+                        src={userAuth?.perfilPhoto ?
+                            `http://localhost:5000/${userAuth.perfilPhoto}`
+                            : defaultImg}
+                        alt="user perfil" />
+                </li>
+            </ul>
         </Container>
     )
 }

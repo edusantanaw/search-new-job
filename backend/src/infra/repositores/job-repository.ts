@@ -20,27 +20,26 @@ export class JobRepository implements jobRepository {
     return vancacy[0];
   }
 
-  async loadJobsByName(name: string, city?: string) {
-    console.log(name, city)
-    if (city) {
-      const vancacys: Job[] = await client.$queryRaw`
-      select * from job
-      inner join company on company.id = job."CompanyId"
-  `;
-      console.log(vancacys)
-      if (vancacys.length === 0) return null;
-      return vancacys;
+  async loadJobsByName(name: string) {
 
-    } else {
-      const vancacys: Job[] = await client.$queryRaw`
+    const vancacys: Job[] = await client.$queryRaw`
         select * from job
         inner join company on company.id = job."CompanyId"
         where "vacancyFor" like ${`%${name}%`} and "openStatus" = true;  
-    `;
-      console.log(vancacys)
-      if (vancacys.length === 0) return null;
-      return vancacys;
-    }
+    `
+    if (vancacys.length === 0) return null;
+    return vancacys;
+
+  }
+
+  async loadJobsByNameAndCity(name: string, city: string) {
+    const vancacys: Job[] = await client.$queryRaw`
+    select * from job
+    inner join company on company.id = job."CompanyId"
+    where "vacancyFor" like ${`%${name}%`} and "openStatus" = true and job.city=${city};  
+`;
+    if (vancacys.length === 0) return null;
+    return vancacys;
   }
 
   async update(status: boolean, id: string) {
@@ -55,8 +54,14 @@ export class JobRepository implements jobRepository {
     return updatedVancacy;
   }
 
-  async getAll() {
-    const vancacys = await job.findMany();
+  async loadRecents(skip: number, take: number) {
+    const vancacys = await job.findMany({
+      orderBy: {
+        createdAt: 'desc'
+      },
+      skip: skip,
+      take: take
+    });
     return vancacys;
   }
 }
