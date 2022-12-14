@@ -18,8 +18,6 @@ const SearchBar = () => {
         }
     }
 
-
-
     return (
         <div className='search'>
             <Input

@@ -52,6 +52,7 @@ model Job {
   vacancyFor  String
   CompanyName Company    @relation(fields: [CompanyId], references: [id])
   CompanyId   String
+  description String     @default(" ") @db.VarChar(600)
   salary      Float      @default(0)
   city        String
   openStatus  Boolean    @default(true)

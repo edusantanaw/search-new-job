@@ -1,6 +1,6 @@
+import { companyRepository } from "../../infra/repositores/protocols/companyRegister";
 import { jobRepository } from "../../infra/repositores/protocols/job-repository";
 import { NotFoundError } from "../../utils/errors/not-found";
-import { companyRepository } from "../company-useCases/protocols/companyRegister";
 
 export class JobUseCase {
   constructor(
@@ -8,7 +8,7 @@ export class JobUseCase {
     private companyRepository: companyRepository
   ) { }
 
-  async create(data: { vacancyFor: string; CompanyId: string, salary: number }) {
+  async create(data: { vacancyFor: string; CompanyId: string, salary: number, description: string }) {
     const { CompanyId } = data;
     const verifyCompanyExists = await this.companyRepository.loadById(
       CompanyId

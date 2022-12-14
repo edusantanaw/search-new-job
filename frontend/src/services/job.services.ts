@@ -8,9 +8,10 @@ function makeToken() {
 export type jobs = {
     vacancyFor: string;
     id: string;
-    companyName: string;
+    name: string;
     city: string;
     salary: number;
+    description: string;
 }
 
 export async function search(data: string[]) {

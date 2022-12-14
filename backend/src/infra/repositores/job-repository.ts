@@ -23,7 +23,7 @@ export class JobRepository implements jobRepository {
   async loadJobsByName(name: string) {
 
     const vancacys: Job[] = await client.$queryRaw`
-        select * from job
+        select job.id,"vacancyFor",job.description, name, company.id, job.city, salary from job
         inner join company on company.id = job."CompanyId"
         where "vacancyFor" like ${`%${name}%`} and "openStatus" = true;  
     `
@@ -34,7 +34,7 @@ export class JobRepository implements jobRepository {
 
   async loadJobsByNameAndCity(name: string, city: string) {
     const vancacys: Job[] = await client.$queryRaw`
-    select * from job
+     select job.id,"vacancyFor",job.description, name, company.id, job.city, salary from job
     inner join company on company.id = job."CompanyId"
     where "vacancyFor" like ${`%${name}%`} and "openStatus" = true and job.city=${city};  
 `;
@@ -55,13 +55,12 @@ export class JobRepository implements jobRepository {
   }
 
   async loadRecents(skip: number, take: number) {
-    const vancacys = await job.findMany({
-      orderBy: {
-        createdAt: 'asc'
-      },
-      skip: skip,
-      take: take
-    });
+    const vancacys: Job[] = await client.$queryRaw`
+       select job.id,"vacancyFor", job.description, company.name, company.id as "compId", job.city, salary from job
+        inner join company on company.id = job."CompanyId"
+        order by job."createdAt" asc
+        limit ${take} offset ${skip};
+    `
     return vancacys;
   }
 }

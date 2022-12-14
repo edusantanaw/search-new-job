@@ -5,10 +5,9 @@ import { Controller } from "../../../utils/protocols/controller";
 export class CreateJobRouter implements Controller {
   constructor(private createJobUseCase: createJobUseCase) { }
 
-  async handle(data: { vacancyFor: string; CompanyId: string, salary: number }) {
+  async handle(data: { vacancyFor: string; CompanyId: string, salary: number, description: string }) {
     try {
-      const { vacancyFor, CompanyId, salary } = data;
-      console.log(vacancyFor);
+      const { vacancyFor, CompanyId, salary, description } = data;
 
       if (!vacancyFor)
         return HttpResponse.badRequest(new InvalidParamError("vacancyFor"));
@@ -19,11 +18,15 @@ export class CreateJobRouter implements Controller {
       if (!salary)
         return HttpResponse.badRequest(new InvalidParamError("salary"));
 
+      if (!description)
+        return HttpResponse.badRequest(new InvalidParamError("description"));
+
 
       const vancacy = await this.createJobUseCase.create({
         vacancyFor,
         CompanyId,
-        salary
+        salary,
+        description
       });
       return HttpResponse.ok({ vancacy });
     } catch (error) {
