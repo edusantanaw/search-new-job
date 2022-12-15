@@ -30,7 +30,7 @@ const Header = () => {
                     {dropDown &&
                         <ul>
                             <li>Configurações</li>
-                            <li>Empresa</li>
+                            <li><Link to="/company/register">Empresa</Link></li>
                             <li onClick={signout}>Sair</li>
                         </ul>
 

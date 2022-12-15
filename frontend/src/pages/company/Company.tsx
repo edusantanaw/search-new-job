@@ -8,6 +8,7 @@ const Company = () => {
     const [companyRespo, setCompany] = useState<company[] | null>(null)
     const [filteredList, setFilterdList] = useState<company[] | null>(null)
     const inputRef = useRef<HTMLInputElement | null>(null)
+
     useEffect(() => {
         (async () => {
             const response = await getCompany()
