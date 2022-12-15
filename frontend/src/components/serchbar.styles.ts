@@ -1,17 +1,7 @@
 import styled from "styled-components"
 
-type inputprops = {
-    w: string; // width
-}
 
-export const Input = styled.input<inputprops>`
-    width: ${props => props.w ? props.w : "5em"};
-    height: 2.9em;
-    padding: 1em;
-    background-color: #D9D9D9;
-    border: 1px solid #D9D9D9;
-    border-radius: 5px;
-`
+
 
 export const Button = styled.button`
     font-size: 1.1em;

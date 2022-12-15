@@ -1,7 +1,8 @@
 import React, { useRef } from 'react'
 import { BiSearchAlt2 } from 'react-icons/bi'
 import { useNavigate } from 'react-router-dom'
-import { Button, Input } from './serchbar.styles'
+import { Input } from '../styles/Global'
+import { Button } from './serchbar.styles'
 
 const SearchBar = () => {
 
