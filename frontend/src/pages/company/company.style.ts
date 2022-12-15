@@ -39,6 +39,7 @@ export const Container = styled.div`
 `
 export const Lists = styled.ul`
     display: flex;
+    flex-wrap: wrap;
     gap: 2em;
 `
 

@@ -27,10 +27,10 @@ export class CompanyRegisterRouter implements Controller {
 
   async handle(request: request) {
     try {
-      console.log(request)
       const newCompany = this.validate(request)
       const company = await this.props.createCompanyUseCase.create({ ...newCompany });
 
+      console.log(company)
       return HttpResponse.ok({ company });
     } catch (error) {
       console.log(error);

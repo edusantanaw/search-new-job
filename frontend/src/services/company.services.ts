@@ -16,6 +16,7 @@ export type company = {
 export async function registerCompany(data: FormData) {
     const options = { headers }
     const response = await Api.post('/company', data, options)
+    console.log(response)
     return response.data
 }
 
