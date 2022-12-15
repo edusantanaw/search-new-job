@@ -3,7 +3,8 @@ import styled from "styled-components";
 export const VancacyContainer = styled.li`
     align-self: flex-end;
     width: 26em;
-    border: 2px solid #D9D9D9;
+    border: 2px solid #FFE81B;
+    background-color: #FFE81B;
     border-radius: 10px;
     display: flex;
     flex-direction: column;

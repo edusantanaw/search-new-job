@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { ListJobs } from '../../components/ListJobs'
+import SearchBar from '../../components/SearchBar'
 import { jobs, search } from '../../services/job.services'
+import { Container } from './search.style'
 
 const Search = () => {
     const params = useParams().params
@@ -20,6 +23,7 @@ const Search = () => {
             if (apiQuery) {
                 const response =
                     await search(apiQuery)
+                console.log(response)
                 setData(response)
             }
         }
@@ -27,8 +31,13 @@ const Search = () => {
         )()
     }, [apiQuery])
 
+
+
     return (
-        <div>Search</div>
+        <Container>
+            <SearchBar />
+            {data && <ListJobs vacancys={data} />}
+        </Container>
     )
 }
 

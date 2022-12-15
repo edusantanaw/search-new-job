@@ -6,17 +6,20 @@ export const Container = styled.header`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #E7E7E7;
+    background-color: #FFE81B;
 
     ul{
         display: flex;
         align-items: center;
         gap: 2em;
+        a{
+            color: #000;
+            text-decoration: none;
+        }
         li{
             list-style: none;
             display: flex;
             align-items: center;
-            cursor: pointer;
             font-size: 1.2em;
         }
 

@@ -30,7 +30,6 @@ export async function signinService(email: string, password: string): Promise<st
             console.log(error)
             return error.response.data
         })
-    console.log(response)
     return response
 
 }

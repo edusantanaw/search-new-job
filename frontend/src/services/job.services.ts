@@ -24,7 +24,7 @@ export async function search(data: string[]) {
 
         }
     })
-    return response.data
+    return response.data.jobs
 }
 
 function updateRecentsSearchs(search: string) {
@@ -44,6 +44,6 @@ export async function loadRecentJobs() {
 
         }
     })
-    console.log(response.data.vancacy)
+    console.log(response.data)
     return response.data.vancacy
 }

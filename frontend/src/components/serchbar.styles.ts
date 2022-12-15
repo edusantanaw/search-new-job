@@ -8,8 +8,8 @@ export const Input = styled.input<inputprops>`
     width: ${props => props.w ? props.w : "5em"};
     height: 2.9em;
     padding: 1em;
-    border: none;
     background-color: #D9D9D9;
+    border: 1px solid #D9D9D9;
     border-radius: 5px;
 `
 
