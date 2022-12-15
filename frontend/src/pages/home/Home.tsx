@@ -23,12 +23,17 @@ const Home = () => {
         <Container>
             <SearchBar />
             <div className='header'>
-                <h2 onClick={() => setShowRecents(true)} className={showRecents ? "decorate" : ""}>Vagas recentes</h2>
-                <h2 onClick={() => setShowRecents(false)} className={!showRecents ? "decorate" : ""}>Buscas recentes</h2>
+                <h2 onClick={() => setShowRecents(false)}
+                    className={!showRecents ? "decorate" : ""}>
+                    Vagas recentes
+                </h2>
+                <h2 onClick={() => setShowRecents(true)}
+                    className={showRecents ? "decorate" : ""}>
+                    Buscas recentes
+                </h2>
             </div>
-            {showRecents ?
-                <ListJobs vacancys={vacancys}
-                /> : <RecentSearch />}
+            {!showRecents ?
+                <ListJobs vacancys={vacancys} /> : <RecentSearch />}
         </Container>
     )
 }

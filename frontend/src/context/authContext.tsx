@@ -1,4 +1,4 @@
-import { createContext, useState, useContext, useEffect } from 'react'
+import { createContext, useState, useContext, useLayoutEffect } from 'react'
 import { AuthContextData, providerProp, userAuth } from '../protocols/Global';
 import { signinService, signupService, userSignup } from '../services/auth.services'
 
@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }: providerProp) => {
     const [tokenAuth, setToken] = useState<string | null>(null)
     const [isLogged, setIsLogged] = useState<boolean>(false)
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         const userStorage = localStorage.getItem("@App:user")
         const tokenStorage = localStorage.getItem('@App:token')
 

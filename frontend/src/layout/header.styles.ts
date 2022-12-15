@@ -30,6 +30,29 @@ export const Container = styled.header`
             border-radius: 50%;
         }
     }
+
+    #dropDown{
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        ul{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 0.5em;
+            padding-bottom: 1em;
+            top: 2em;
+            position: absolute;
+            background-color: blue;
+            border-radius: 7px;
+            gap: 0.5em;
+
+            li{
+                font-size: 0.8em;
+            }
+    }}
 `
 
 export const Logo = styled.h1`

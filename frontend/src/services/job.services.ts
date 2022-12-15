@@ -34,7 +34,7 @@ function updateRecentsSearchs(search: string) {
     const verifyAlreadyExists: string[] = recents.filter((recent: string) => recent === search)
     if (verifyAlreadyExists.length > 0) return
     const updatedRecents: string[] = [search, ...recents]
-    localStorage.setItem('@App:recents', JSON.stringify(updatedRecents))
+    localStorage.setItem(recentsKey, JSON.stringify(updatedRecents))
 }
 
 

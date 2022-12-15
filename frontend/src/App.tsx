@@ -8,7 +8,6 @@ import Search from "./pages/search/Search"
 
 function App() {
   const { isLogged } = useAuth()
-  console.log(isLogged)
   return (
     <div>
       <Global />

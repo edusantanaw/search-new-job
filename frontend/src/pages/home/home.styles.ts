@@ -33,23 +33,5 @@ export const Container = styled.section`
         }
     }
 
-    .content{
-        display: flex;
-        position: relative;
-    }
-
-    .details{
-        top: 0;
-        margin-top: 1em;
-        margin-left: 4em;
-        padding: 1em;
-        width: 26em;
-        height:40em;
-        border: 2px solid #FFE81B;
-        border-radius: 10px;
-        margin-bottom: 1em;
-        position: sticky ;    
-    }
-
 `
 
