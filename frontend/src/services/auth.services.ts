@@ -1,4 +1,5 @@
 import { Api } from "../utils/api";
+import { tokenKey, userKey } from "../utils/keys";
 
 export type userSignup = {
     firstName: string;
@@ -14,8 +15,8 @@ interface response {
 }
 
 const makeStorage = (user: any, token: string) => {
-    localStorage.setItem("@App:user", JSON.stringify(user))
-    localStorage.setItem("@App:token", token)
+    localStorage.setItem(userKey, JSON.stringify(user))
+    localStorage.setItem(tokenKey, token)
 }
 
 export async function signinService(email: string, password: string): Promise<string | response> {

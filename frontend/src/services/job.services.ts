@@ -1,7 +1,9 @@
 import { Api } from "../utils/api"
+import { recentsKey, tokenKey } from "../utils/keys";
+
 
 function makeToken() {
-    const token = localStorage.getItem('@App:token')
+    const token = localStorage.getItem(tokenKey)
     return token
 }
 
@@ -28,7 +30,7 @@ export async function search(data: string[]) {
 }
 
 function updateRecentsSearchs(search: string) {
-    const recents = JSON.parse(localStorage.getItem("@App:recents") || "[]")
+    const recents = JSON.parse(localStorage.getItem(recentsKey) || "[]")
     const verifyAlreadyExists: string[] = recents.filter((recent: string) => recent === search)
     if (verifyAlreadyExists.length > 0) return
     const updatedRecents: string[] = [search, ...recents]
