@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { ListJobs } from '../../components/ListJobs'
 import RecentSearch from '../../components/RecentSearch'
 import SearchBar from '../../components/SearchBar'
+import useService from '../../hooks/useApi'
 import { jobs, loadRecentJobs } from '../../services/job.services'
 import { Container } from './home.styles'
 
@@ -12,11 +13,13 @@ const Home = () => {
 
     useEffect(() => {
         (async () => {
-            const data = await loadRecentJobs()
+            const data = await loadRecentJobs(1, 1)
             setVacancys(data)
             setLoading(false)
         })()
     }, [])
+
+
 
     if (loading) return <></>
     return (

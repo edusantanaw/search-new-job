@@ -19,7 +19,7 @@ const Header = () => {
             <Logo>This is my logo</Logo>
             <ul>
                 <li><Link to="/" >Anunciar vaga</Link></li>
-                <li>Empresas</li>
+                <li><Link to='/company'>Empresas</Link></li>
                 <li><Link to="/">Achar vagas</Link ></li>
                 <li id="dropDown">
                     <img onClick={handleDropDown}

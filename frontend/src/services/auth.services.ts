@@ -7,6 +7,7 @@ export type userSignup = {
     email: string;
     password: string;
     confirmPassword: string;
+    id: string;
 };
 
 interface response {
@@ -48,6 +49,5 @@ export async function signupService(
         .catch((error: { response: { data: string } }) => {
             return error.response.data;
         });
-    console.log(response);
     return response;
 }

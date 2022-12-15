@@ -7,9 +7,13 @@ export class LoadRecentJobRouter implements Controller {
 
   async handle({ skip, take }: { skip: number, take: number }) {
     try {
+      skip = Number(skip)
+      take = Number(take)
+      console.log(take)
       const vancacy = await this.loadUserUseCase.loadRecentVacancys(skip, take);
       return HttpResponse.ok({ vancacy });
     } catch (error) {
+      console.log(error)
       return HttpResponse.catchError(error);
     }
   }

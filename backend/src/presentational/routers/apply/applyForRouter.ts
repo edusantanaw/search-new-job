@@ -3,11 +3,10 @@ import { HttpResponse, InvalidParamError } from "../../../utils/errors";
 import { Controller } from "../../../utils/protocols/controller";
 
 export class ApplyForJobRouter implements Controller {
-  constructor(private applyForJobUseCase: applyForJobUseCase) {}
+  constructor(private applyForJobUseCase: applyForJobUseCase) { }
 
-  async handle(req: { userId: string; vacancyId: string }) {
+  async handle({ userId, vacancyId }: { userId: string, vacancyId: string }) {
     try {
-      const { userId, vacancyId } = req;
       if (!userId)
         return HttpResponse.badRequest(new InvalidParamError("userId"));
       if (!vacancyId)

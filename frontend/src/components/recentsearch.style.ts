@@ -17,7 +17,7 @@ export const Recents = styled.div`
         list-style: none;
         width: 100%;
         padding: 0.5em 1em;
-        background-color: #FFE81B;
+        background-color: #D9D9D9;
         border-radius: 5px;
     }
 `

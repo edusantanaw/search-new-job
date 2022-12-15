@@ -24,7 +24,7 @@ export const Container = styled.section`
         width: 100%;
         justify-content: center;
         gap: 10em;
-        border-bottom: 2px solid #FFE81B;
+        border-bottom: 2px solid #D9D9D9;
         h2{
         font-size: 1.7em;
         font-weight: 400;

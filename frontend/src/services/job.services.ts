@@ -1,11 +1,7 @@
 import { Api } from "../utils/api"
-import { recentsKey, tokenKey } from "../utils/keys";
-
-
-function makeToken() {
-    const token = localStorage.getItem(tokenKey)
-    return token
-}
+import { headers } from "../utils/headers";
+import { recentsKey } from "../utils/keys";
+import { makeRecents } from "../utils/makeRecents";
 
 export type jobs = {
     vacancyFor: string;
@@ -16,48 +12,36 @@ export type jobs = {
     description: string;
 }
 
-export async function search(data: string[]) {
-    const token = makeToken()
-    updateRecentsSearchs(data[0])
-    const response = await Api.get(`/jobs/search/${data[0]}`, {
-        params: { city: data[1] },
-        headers: {
-            Authorization: `Bearer ${token}`,
-
-        }
-    })
-    return response.data.jobs
-}
 
 function updateRecentsSearchs(search: string) {
-    const recents = JSON.parse(localStorage.getItem(recentsKey) || "[]")
-    const verifyAlreadyExists: string[] = recents.filter((recent: string) => recent === search)
-    if (verifyAlreadyExists.length > 0) return
+    const recents = makeRecents()
     const updatedRecents: string[] = [search, ...recents]
     localStorage.setItem(recentsKey, JSON.stringify(updatedRecents))
 }
 
+async function search(data: string[]) {
+    updateRecentsSearchs(data[0])
+    const options = { params: { city: data[1] }, headers }
+    const response = await Api.get(`/jobs/search/${data[0]}`, options)
+    return response.data.jobs
+}
 
-export async function loadRecentJobs() {
-    const token = makeToken()
-    const response: { data: { vancacy: jobs[] } } = await Api.get("jobs", {
-        headers: {
-            Authorization: `Bearer ${token}`,
 
-        }
-    })
-    console.log(response.data)
+async function loadRecentJobs(take: number, skip: number) {
+    const options = { params: { take, skip }, headers }
+    const response = await Api.get("jobs", options)
     return response.data.vancacy
 }
 
-export async function applyForJob(userId: string, vancacyId: string) {
-    const token = makeToken()
-    const response = await Api.post(`/apply/${vancacyId}`, { userId: userId }, {
-        headers: {
-            Authorization: `Bearer ${token}`,
+async function applyForJob(userId: string, vacancyId: string) {
+    const data = { userId, vacancyId }
+    const options = { headers }
+    const response = await Api.post('apply', data, options)
+    return response.data
+}
 
-        }
-    })
-    console.log(response)
-
+export {
+    applyForJob,
+    loadRecentJobs,
+    search
 }

@@ -1,9 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { makeRecents } from '../utils/makeRecents'
 import { Recents } from './recentsearch.style'
 
 const RecentSearch = () => {
-    const recents = JSON.parse(localStorage.getItem("@App:recents") || "[]")
+    const recents = makeRecents()
     return (
         <Recents>
             <ul>

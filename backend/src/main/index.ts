@@ -8,7 +8,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
 router(app);
-const port = process.env.Port || 5000;
+const port = process.env.Port || 5001;
 
 app.listen(port, () => console.log(`Server running at ${port}`));
 

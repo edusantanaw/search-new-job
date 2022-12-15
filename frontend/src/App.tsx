@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Auth from './pages/auth/Index'
 import Header from "./layout/Header"
 import Search from "./pages/search/Search"
+import Company from "./pages/company/Company"
 
 function App() {
   const { isLogged } = useAuth()
@@ -15,6 +16,7 @@ function App() {
         {isLogged && <Header />}
         <Routes>
           <Route path="/" element={isLogged ? <Home /> : <Navigate to="/signin" />} />
+          <Route path="/company" element={isLogged ? <Company /> : <Navigate to="/signin" />} />
           <Route path="/search/:params" element={isLogged ? <Search /> : <Navigate to="/signin" />} />
           <Route path="/signin" element={!isLogged ? <Auth /> : <Navigate to="/" />} />
         </Routes>
