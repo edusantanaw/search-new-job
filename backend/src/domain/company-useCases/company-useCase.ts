@@ -6,7 +6,8 @@ export class CompanyUseCase {
 
   async create(data: any) {
     const verifyIfEmail = await this.companyRepository.loadByEmail(data.email);
-    if (verifyIfEmail) throw new emailAlreadyUsed();
+    console.log(verifyIfEmail)
+    if (verifyIfEmail?.email) throw new emailAlreadyUsed();
 
     const company = await this.companyRepository.save({
       ...data,

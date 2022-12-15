@@ -27,6 +27,7 @@ export class CompanyRegisterRouter implements Controller {
 
   async handle(request: request) {
     try {
+      console.log(request)
       const newCompany = this.validate(request)
       const company = await this.props.createCompanyUseCase.create({ ...newCompany });
 
@@ -44,28 +45,28 @@ export class CompanyRegisterRouter implements Controller {
 
     if (typeof phone === "string") phone = Number(phone);
 
-    if (!name) return HttpResponse.badRequest(new InvalidParamError("name"));
+    if (!name) throw HttpResponse.badRequest(new InvalidParamError("name"));
 
     if (!description)
-      return HttpResponse.badRequest(new InvalidParamError("description"));
+      throw HttpResponse.badRequest(new InvalidParamError("description"));
 
     if (!perfilLogo)
-      return HttpResponse.badRequest(new InvalidParamError("perfilLogo"));
+      throw HttpResponse.badRequest(new InvalidParamError("perfilLogo"));
 
     if (!email)
-      return HttpResponse.badRequest(new InvalidParamError("email"));
+      throw HttpResponse.badRequest(new InvalidParamError("email"));
 
     if (!phone)
-      return HttpResponse.badRequest(new InvalidParamError("phone"));
+      throw HttpResponse.badRequest(new InvalidParamError("phone"));
 
     if (!ownerId)
-      return HttpResponse.badRequest(new InvalidParamError("ownerId"));
+      throw HttpResponse.badRequest(new InvalidParamError("ownerId"));
 
     if (!city)
-      return HttpResponse.badRequest(new InvalidParamError("city"));
+      throw HttpResponse.badRequest(new InvalidParamError("city"));
 
     if (!this.props.emailValidator.isValid(email))
-      return HttpResponse.badRequest(new InvalidParamError("email"));
+      throw HttpResponse.badRequest(new InvalidParamError("email"));
 
     return { name, description, email, phone, ownerId, city, perfilLogo }
   }

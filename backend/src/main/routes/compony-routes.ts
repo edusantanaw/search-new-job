@@ -9,7 +9,7 @@ import { LoadCompanyByIdComposer } from "../composers/company/loadCompanyByIdCom
 
 export default (router: Router): void => {
   router.post(
-    "/register",
+    "/company",
     verifyTokenMiddleware,
     multerMiddleware,
     adapt(CompanyRegisterCompose.compose())

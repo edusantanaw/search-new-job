@@ -38,6 +38,7 @@ export class CompanyRepository implements companyRepository {
         email: email,
       },
     });
+    console.log(companyResponse)
     if (companyResponse) return companyResponse;
     return null;
   }
