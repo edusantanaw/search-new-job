@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { jobs } from '../services/job.services'
+import { useAuth } from '../context/authContext'
+import { applyForJob, jobs } from '../services/job.services'
 import { Container, List } from './list.styles'
 import { Vacancy } from './Vacancy'
 interface props {
@@ -7,12 +8,19 @@ interface props {
 }
 
 export const ListJobs = ({ vacancys }: props) => {
-
+    const { userAuth } = useAuth()
     const [actualDescription, setActual] = useState<jobs[] | null>(vacancys ? [vacancys[0]] : null)
 
     function handleDesc(job: jobs) {
         setActual([job])
     }
+
+    async function handleApply(vacancyId: string) {
+        if (userAuth) {
+            const response = await applyForJob(userAuth.id, vacancyId)
+        }
+    }
+
     return (
         <Container className='content'>
             <List>
@@ -27,6 +35,7 @@ export const ListJobs = ({ vacancys }: props) => {
                     <p>{desc.city}</p>
                     <p>{desc.salary}</p>
                     <p>{desc.description}</p>
+                    <button onClick={() => handleApply(desc.id)}>Candidatar-se</button>
                 </div>
             ))}
         </Container>

@@ -1,6 +1,6 @@
 import { LoadCandidatesUseCase } from "../../../domain/candidate/loadCandidatesUseCase";
 import { ApplyRepository } from "../../../infra/repositores/applyRepository";
-import { LoadCandidatesRouter } from "../../../presentational/routers/apply/LoadCandidatesRouter";
+import { LoadCandidatesRouter } from "../../../presentational/routers/apply/loadCandidatesRouter";
 
 export class LoadCandidatesCompose {
   static compose() {

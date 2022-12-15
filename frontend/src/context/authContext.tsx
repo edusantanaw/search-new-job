@@ -31,7 +31,7 @@ export const AuthProvider = ({ children }: providerProp) => {
     async function signin(email: string, password: string) {
 
         const response = await signinService(email, password)
-        if (typeof response !== 'string') {
+        if (typeof response !== 'string') { // api returns an message error or an object with token and user
             const { accessToken, user } = response
             setUserAuth(user)
             setToken(accessToken)

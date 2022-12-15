@@ -49,3 +49,15 @@ export async function loadRecentJobs() {
     console.log(response.data)
     return response.data.vancacy
 }
+
+export async function applyForJob(userId: string, vancacyId: string) {
+    const token = makeToken()
+    const response = await Api.post(`/apply/${vancacyId}`, { userId: userId }, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+
+        }
+    })
+    console.log(response)
+
+}

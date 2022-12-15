@@ -12,9 +12,9 @@ export class JobRepository implements jobRepository {
 
   async getJobById(id: string) {
     const vancacy: Job[] = await client.$queryRaw`
-        select * from "Job" 
-        inner join "Company" on  "Company".id = "Job"."CompanyId"
-        where "Job".id = ${id};
+        select * from job 
+        inner join company on  company.id = job."CompanyId"
+        where job.id = ${id};
     `;
     if (!vancacy) return null;
     return vancacy[0];

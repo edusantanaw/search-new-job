@@ -7,18 +7,18 @@ import { Container } from './home.styles'
 
 const Home = () => {
     const [vacancys, setVacancys] = useState<jobs[] | null>(null)
-
     const [showRecents, setShowRecents] = useState<boolean>(false)
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         (async () => {
             const data = await loadRecentJobs()
             setVacancys(data)
+            setLoading(false)
         })()
     }, [])
 
-
-
+    if (loading) return <></>
     return (
         <Container>
             <SearchBar />

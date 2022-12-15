@@ -9,6 +9,7 @@ export type userAuth = {
     perfilPhoto?: string;
     phoneNumber?: number;
     city?: string
+    id: string;
 }
 
 export interface AuthContextData {

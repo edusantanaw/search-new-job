@@ -5,7 +5,7 @@ import { LoadCandidatesCompose } from "../composers/candidate/loadCandidates-com
 import { RemoveApplyComposer } from "../composers/candidate/removeApply-composer";
 
 export default (router: Router): void => {
-  router.post("/apply/:id", adapt(ApplyComposer.compose()));
+  router.post("/apply/:vacancyId", adapt(ApplyComposer.compose()));
   router.get("/apply/:vacancyId", adapt(LoadCandidatesCompose.compose()));
   router.delete("/apply", adapt(RemoveApplyComposer.compose()));
 };
